@@ -1,0 +1,10 @@
+Welcome to Monthly Mortgage Calculator!
+
+Enter the principal on your mortgage. 
+>>130000
+Enter the yearly interest rate (without percent sign). 
+>>4.75
+Enter how many years you will pay this mortgage. 
+>>20
+
+Your monthly payment is $840.09!

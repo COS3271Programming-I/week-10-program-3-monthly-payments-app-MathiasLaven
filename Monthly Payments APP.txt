@@ -1,0 +1,119 @@
+package my_project;
+import java.util.Scanner;
+
+class MyClass {
+	 static Scanner userinput = new Scanner(System.in);
+		 static double computePayment(double loanAmt, double rate, int yearsNum) {
+			 //practically rewrote this whole section
+			 //if i changed something that wasn't technically broken, my apologies
+			 //it was so messy i couldn't really tell
+			 double monthlyRate = (rate / 12.0) / 100;
+			 int monthsNum = yearsNum * 12;
+			 
+			 double ratePower = Math.pow(1 + monthlyRate, monthsNum);
+			 
+		     double numerator = loanAmt * monthlyRate * ratePower;
+		     double denominator = ratePower - 1;
+		     double answer = numerator / denominator;
+		     
+		     //debugging lines
+		     //System.out.println("");
+			 //System.out.println("monthly rate " + monthlyRate);
+			 //System.out.println("months number " + monthsNum);
+			 //System.out.println("rate power " + ratePower);
+			 //System.out.println("numerator " + numerator);
+			 //System.out.println("denominator " + denominator);
+			 //System.out.println("answer " + answer);
+		     
+		     return answer;
+		 }
+
+		 public static void main (String[] args){  
+			 System.out.println("Welcome to Monthly Mortgage Calculator!");
+			 System.out.println("");
+			 
+			 //get each value
+			 double a = promptDouble("Enter the principal on your mortgage.");
+			 double b = promptDouble("Enter the yearly interest rate (without percent sign).");
+		     int c = promptInt("Enter how many years you will pay this mortgage.");
+		     
+		     //compute and display
+		     double monthlyPayment = computePayment(a,b,c);
+		     
+			 System.out.println("");
+		     System.out.format("Your monthly payment is $%.2f!", monthlyPayment);
+		}
+	    //helper functions since my user input format is so consistent
+	    public static String promptString(String message) {
+	    	System.out.format("%s \n>>", message);
+	    	return userinput.nextLine();
+	    }
+	    public static int promptInt(String message) {
+	    	int input = 0;
+	    	String errorMsg = "Error: That is not an integer. Please enter a valid number with no decimal component.";
+
+	    	try {
+		    	System.out.format("%s \n>>", message);
+		    	input = userinput.nextInt();
+		    	
+		    	userinput.nextLine();
+		    	return input;
+	    	} catch (Exception e) {
+		    	System.out.println(errorMsg);
+		    	System.out.println("");
+		    	
+				userinput.nextLine();
+	    	}
+	    	
+	    	while (true) {
+	    		try {
+			    	System.out.format("%s \n>>", message);
+			    	input = userinput.nextInt();
+			    	
+			    	userinput.nextLine();
+			    	return input;
+	    		} catch (Exception e2) { 
+			    	System.out.println(errorMsg);
+			    	System.out.println("");
+			    	
+			    	userinput.nextLine();
+			    	continue;
+	    		}
+	    	}
+
+	    }
+	    public static double promptDouble(String message) {
+	    	double input = 0;
+	    	String errorMsg = "Error: That is not a number. Please enter a valid number with or without decimal component.";
+
+	    	try {
+		    	System.out.format("%s \n>>", message);
+		    	input = userinput.nextDouble();
+		    	
+		    	userinput.nextLine();
+		    	return input;
+	    	} catch (Exception e) {
+		    	System.out.println(errorMsg);
+		    	System.out.println("");
+		    	
+		    	userinput.nextLine();
+	    	}
+	    	
+	    	while (true) {
+	    		try {
+			    	System.out.format("%s \n>>", message);
+			    	input = userinput.nextDouble();
+			    	
+			    	userinput.nextLine();
+			    	return input;
+	    		} catch (Exception e2) { 
+			    	System.out.println(errorMsg);
+			    	System.out.println("");
+			    	
+			    	userinput.nextLine();
+			    	continue;
+	    		}
+	    	}
+
+	    }
+  }
